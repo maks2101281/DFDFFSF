@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky Casino - Telegram Web App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header h1 {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            margin: 1rem;
+            border-radius: 10px;
+        }
+
+        .balance {
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffd700;
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .game-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-description {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 20px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 400px;
+            border: 2px solid #ffd700;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #ccc;
+        }
+
+        .close-btn:hover {
+            color: #ffd700;
+        }
+
+        .slot-machine {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .slot-window {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 2rem 0;
+            background: #1a1a2e;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 3px solid #ffd700;
+        }
+
+        .slot-reel {
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1a1a2e;
+        }
+
+        .spin-btn {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #1a1a2e;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .spin-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .spin-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .bet-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .bet-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .bet-amount {
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.2rem;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .winning-message {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            z-index: 2000;
+            animation: slideIn 0.3s ease;
+        }
+
+        .notification.success {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+        }
+
+        .notification.error {
+            background: linear-gradient(135deg, #f44336, #da190b);
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes spin {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-20px); }
+        }
+
+        .spinning {
+            animation: spin 0.5s ease-in-out;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #ffd700;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎰 Lucky Casino</h1>
+        <p>Добро пожаловать в лучшее казино Telegram!</p>
+    </div>
+
+    <div class="user-info">
+        <div>
+            <div>Баланс: <span class="balance" id="userBalance">1000€</span></div>
+            <div style="font-size: 0.9rem; color: #ccc;">ID: <span id="userId">-</span></div>
+        </div>
+        <button onclick="showProfile()" style="background: rgba(255,255,255,0.2); border: none; color: #fff; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;">
+            👤 Профиль
+        </button>
+    </div>
+
+    <div class="games-grid">
+        <div class="game-card" onclick="openGame('doghouse')">
+            <div class="game-icon">🏠</div>
+            <div class="game-title">The Dog House Megaways</div>
+            <div class="game-description">Легендарная игра с мегавэйсами</div>
+        </div>
+        
+        <div class="game-card" onclick="openGame('slots')">
+            <div class="game-icon">🎰</div>
+            <div class="game-title">Классические слоты</div>
+            <div class="game-description">Популярные игровые автоматы</div>
+        </div>
+        
+        <div class="game-card" onclick="openGame('blackjack')">
+            <div class="game-icon">♠️</div>
+            <div class="game-title">Блэкджек</div>
+            <div class="game-description">Попробуйте обыграть дилера</div>
+        </div>
+        
+        <div class="game-card" onclick="openGame('roulette')">
+            <div class="game-icon">🎲</div>
+            <div class="game-title">Рулетка</div>
+            <div class="game-description">Европейская рулетка</div>
+        </div>
+        
+        <div class="game-card" onclick="openGame('poker')">
+            <div class="game-icon">♥️</div>
+            <div class="game-title">Покер</div>
+            <div class="game-description">Техасский Холдем</div>
+        </div>
+        
+        <div class="game-card" onclick="showBonuses()">
+            <div class="game-icon">🎁</div>
+            <div class="game-title">Бонусы</div>
+            <div class="game-description">Получите щедрые бонусы</div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для игр -->
+    <div id="gameModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="gameTitle">Название игры</h2>
+            <div id="gameContent">
+                <div class="loading">Загрузка игры...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Инициализация Telegram Web App
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+        tg.ready();
+
+        // Получаем данные пользователя
+        const user = tg.initDataUnsafe?.user;
+        if (user) {
+            document.getElementById('userId').textContent = user.id;
+        }
+
+        // Текущая игра
+        let currentGame = null;
+        let currentBet = 10;
+        let userBalance = 1000;
+
+        // Открытие игры
+        function openGame(gameType) {
+            currentGame = gameType;
+            const modal = document.getElementById('gameModal');
+            const gameTitle = document.getElementById('gameTitle');
+            const gameContent = document.getElementById('gameContent');
+
+            switch (gameType) {
+                case 'doghouse':
+                    gameTitle.textContent = 'The Dog House Megaways';
+                    setupDogHouseGame(gameContent);
+                    break;
+                case 'slots':
+                    gameTitle.textContent = 'Классические слоты';
+                    setupSlotGame(gameContent);
+                    break;
+                case 'blackjack':
+                    gameTitle.textContent = 'Блэкджек';
+                    gameContent.innerHTML = '<div class="loading">Игра в разработке...</div>';
+                    break;
+                case 'roulette':
+                    gameTitle.textContent = 'Рулетка';
+                    gameContent.innerHTML = '<div class="loading">Игра в разработке...</div>';
+                    break;
+                case 'poker':
+                    gameTitle.textContent = 'Покер';
+                    gameContent.innerHTML = '<div class="loading">Игра в разработке...</div>';
+                    break;
+            }
+
+            modal.style.display = 'block';
+        }
+
+        // Настройка игры The Dog House Megaways
+        function setupDogHouseGame(container) {
+            container.innerHTML = `
+                <div class="slot-machine">
+                    <div class="slot-window">
+                        <div class="slot-reel">🐕</div>
+                        <div class="slot-reel">🐩</div>
+                        <div class="slot-reel">🦮</div>
+                        <div class="slot-reel">🐕‍🦺</div>
+                        <div class="slot-reel">🦴</div>
+                        <div class="slot-reel">🏠</div>
+                    </div>
+                    
+                    <div class="bet-controls">
+                        <button class="bet-btn" onclick="changeBet(-5)">-</button>
+                        <span class="bet-amount">${currentBet}€</span>
+                        <button class="bet-btn" onclick="changeBet(5)">+</button>
+                    </div>
+                    
+                    <button class="spin-btn" onclick="spinSlot()" id="spinBtn">SPIN</button>
+                    
+                    <div id="winningMessage"></div>
+                </div>
+            `;
+        }
+
+        // Настройка классических слотов
+        function setupSlotGame(container) {
+            container.innerHTML = `
+                <div class="slot-machine">
+                    <div class="slot-window">
+                        <div class="slot-reel">🍒</div>
+                        <div class="slot-reel">🍊</div>
+                        <div class="slot-reel">🍇</div>
+                    </div>
+                    
+                    <div class="bet-controls">
+                        <button class="bet-btn" onclick="changeBet(-5)">-</button>
+                        <span class="bet-amount">${currentBet}€</span>
+                        <button class="bet-btn" onclick="changeBet(5)">+</button>
+                    </div>
+                    
+                    <button class="spin-btn" onclick="spinSlot()" id="spinBtn">SPIN</button>
+                    
+                    <div id="winningMessage"></div>
+                </div>
+            `;
+        }
+
+        // Изменение ставки
+        function changeBet(amount) {
+            const newBet = currentBet + amount;
+            if (newBet >= 1 && newBet <= 1000) {
+                currentBet = newBet;
+                document.querySelector('.bet-amount').textContent = `${currentBet}€`;
+            }
+        }
+
+        // Вращение слотов
+        function spinSlot() {
+            if (userBalance < currentBet) {
+                showNotification('Недостаточно средств!', 'error');
+                return;
+            }
+
+            const spinBtn = document.getElementById('spinBtn');
+            const reels = document.querySelectorAll('.slot-reel');
+            
+            spinBtn.disabled = true;
+            spinBtn.textContent = 'SPINNING...';
+            
+            // Списываем ставку
+            userBalance -= currentBet;
+            updateBalance();
+
+            // Анимация вращения
+            reels.forEach((reel, index) => {
+                setTimeout(() => {
+                    reel.classList.add('spinning');
+                    
+                    setTimeout(() => {
+                        const symbols = currentGame === 'doghouse' 
+                            ? ['🐕', '🐩', '🦮', '🐕‍🦺', '🦴', '🏠', '🎾', '🥩', '💎', '7️⃣']
+                            : ['🍒', '🍊', '🍇', '🍓', '🍎', '🍋', '💎', '7️⃣'];
+                        
+                        const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+                        reel.textContent = randomSymbol;
+                        reel.classList.remove('spinning');
+                        
+                        // Проверяем выигрыш на последнем барабане
+                        if (index === reels.length - 1) {
+                            checkWin(reels);
+                        }
+                    }, 500);
+                }, index * 200);
+            });
+
+            setTimeout(() => {
+                spinBtn.disabled = false;
+                spinBtn.textContent = 'SPIN';
+            }, 2000);
+        }
+
+        // Проверка выигрыша
+        function checkWin(reels) {
+            const symbols = Array.from(reels).map(reel => reel.textContent);
+            let winnings = 0;
+            let message = '';
+
+            if (symbols.every(s => s === symbols[0])) {
+                winnings = currentBet * 10;
+                message = `🎉 ДЖЕКПОТ! Выигрыш: ${winnings}€!`;
+            } else if (symbols[0] === symbols[1] || symbols[1] === symbols[2]) {
+                winnings = currentBet * 2;
+                message = `🎊 Выигрыш: ${winnings}€!`;
+            } else {
+                message = '😔 Попробуйте еще раз!';
+            }
+
+            if (winnings > 0) {
+                userBalance += winnings;
+                updateBalance();
+            }
+
+            const winningMessage = document.getElementById('winningMessage');
+            winningMessage.innerHTML = `<div class="winning-message">${message}</div>`;
+
+            // Отправляем данные в бот
+            sendDataToBot({
+                game: currentGame,
+                bet: currentBet,
+                winnings: winnings,
+                balance: userBalance
+            });
+        }
+
+        // Обновление баланса
+        function updateBalance() {
+            document.getElementById('userBalance').textContent = `${userBalance}€`;
+        }
+
+        // Показать профиль
+        function showProfile() {
+            const profileData = {
+                balance: userBalance,
+                gamesPlayed: 15,
+                totalWinnings: 2500
+            };
+
+            tg.showAlert(`
+👤 Профиль игрока
+
+Баланс: ${profileData.balance}€
+Игр сыграно: ${profileData.gamesPlayed}
+Общий выигрыш: ${profileData.totalWinnings}€
+            `);
+        }
+
+        // Показать бонусы
+        function showBonuses() {
+            tg.showAlert(`
+🎁 Доступные бонусы:
+
+• Приветственный бонус: 200% до 1000€
+• Бездепозитный бонус: 50€
+• Программа лояльности: до 15% кэшбэк
+
+Для активации бонусов обратитесь к поддержке.
+            `);
+        }
+
+        // Закрытие модального окна
+        function closeModal() {
+            document.getElementById('gameModal').style.display = 'none';
+        }
+
+        // Показать уведомление
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 3000);
+        }
+
+        // Отправка данных в бот
+        function sendDataToBot(data) {
+            if (tg.isVersionAtLeast('6.1')) {
+                tg.sendData(JSON.stringify(data));
+            }
+        }
+
+        // Закрытие по клику вне модального окна
+        window.onclick = function(event) {
+            const modal = document.getElementById('gameModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html> 

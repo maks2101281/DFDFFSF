@@ -1,0 +1,1055 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar {
+    padding: 1rem 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffd700;
+}
+
+.nav-logo i {
+    font-size: 2rem;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffd700;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* User Panel Styles */
+.user-panel {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.user-name {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.user-balance {
+    color: #ffd700;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.user-menu {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.user-menu .btn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Button Styles */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #1a1a2e;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+.btn-secondary:hover {
+    background: #fff;
+    color: #1a1a2e;
+}
+
+.btn-outline {
+    background: transparent;
+    color: #ffd700;
+    border: 2px solid #ffd700;
+}
+
+.btn-outline:hover {
+    background: #ffd700;
+    color: #1a1a2e;
+}
+
+.btn-large {
+    padding: 16px 32px;
+    font-size: 1.1rem;
+}
+
+.btn-game {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    margin-top: 1rem;
+}
+
+.btn-bonus {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    color: #fff;
+    margin-top: 1rem;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Hero Section */
+.hero {
+    padding: 120px 0 80px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.highlight {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 2rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Slot Machine */
+.slot-machine {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.slot-window {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 2rem;
+    background: #1a1a2e;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 3px solid #ffd700;
+}
+
+.slot-reel {
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1a1a2e;
+    transition: transform 0.5s ease;
+}
+
+.spin-btn {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #1a1a2e;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.spin-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+}
+
+/* Games Section */
+.games {
+    padding: 80px 0;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 3rem;
+    font-weight: 700;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.game-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.game-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: #ffd700;
+}
+
+.game-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: #1a1a2e;
+}
+
+.game-card h3 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.game-card p {
+    color: #ccc;
+    margin-bottom: 1.5rem;
+}
+
+/* Bonuses Section */
+.bonuses {
+    padding: 80px 0;
+}
+
+.bonuses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.bonus-card {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 237, 78, 0.1));
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.bonus-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+}
+
+.bonus-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+    color: #1a1a2e;
+}
+
+.bonus-card h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.bonus-amount {
+    color: #ffd700;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.bonus-card p {
+    color: #ccc;
+    margin-bottom: 1.5rem;
+}
+
+/* About Section */
+.about {
+    padding: 80px 0;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-text h2 {
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.about-text p {
+    color: #ccc;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.features {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ffd700;
+    font-weight: 600;
+}
+
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.stat {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.stat h3 {
+    color: #ffd700;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.stat p {
+    color: #ccc;
+    font-weight: 500;
+}
+
+/* Footer */
+.footer {
+    background: rgba(26, 26, 46, 0.95);
+    padding: 60px 0 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    color: #ffd700;
+    margin-bottom: 1rem;
+}
+
+.footer-section p {
+    color: #ccc;
+    margin-bottom: 1rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #ffd700;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 215, 0, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffd700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: #ffd700;
+    color: #1a1a2e;
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ccc;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.game-modal {
+    max-width: 800px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+
+.close:hover {
+    color: #ffd700;
+}
+
+.modal-tabs {
+    display: flex;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    color: #ccc;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    color: #ffd700;
+    border-bottom: 2px solid #ffd700;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Form Styles */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.auth-form input {
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.auth-form input::placeholder {
+    color: #ccc;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: #ffd700;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+}
+
+.auth-form input.error {
+    border-color: #f44336;
+    box-shadow: 0 0 0 2px rgba(244, 67, 54, 0.2);
+}
+
+/* Profile Modal Styles */
+.profile-info {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.profile-avatar {
+    font-size: 4rem;
+    color: #ffd700;
+}
+
+.profile-details h3 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.profile-details p {
+    color: #ccc;
+    margin-bottom: 1.5rem;
+}
+
+.profile-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-label {
+    color: #ccc;
+    font-weight: 500;
+}
+
+.stat-value {
+    color: #ffd700;
+    font-weight: 700;
+}
+
+/* Game Modal Styles */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.game-info p {
+    color: #fff;
+    font-weight: 600;
+}
+
+.bet-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.bet-controls label {
+    color: #fff;
+    font-weight: 600;
+}
+
+.bet-controls input {
+    width: 80px;
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-align: center;
+}
+
+.bet-controls .btn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+}
+
+.game-area {
+    min-height: 300px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+}
+
+.game-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* The Dog House Megaways Game Styles */
+.dog-house-game {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    border-radius: 20px;
+    padding: 2rem;
+    color: #fff;
+}
+
+.game-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.game-header h2 {
+    color: #ffd700;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.game-info span {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.reels-container {
+    background: #1a1a2e;
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 3px solid #ffd700;
+}
+
+.reels {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.reel {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 60px;
+}
+
+.symbol {
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1a1a2e;
+    transition: all 0.3s ease;
+}
+
+.symbol.winning {
+    background: #ffd700;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.bet-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.bet-controls span {
+    font-weight: 700;
+    color: #ffd700;
+    min-width: 60px;
+    text-align: center;
+}
+
+.game-features {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.feature-label {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.feature-value {
+    color: #ffd700;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.winning-lines {
+    text-align: center;
+    min-height: 50px;
+}
+
+.winning-line {
+    background: rgba(255, 215, 0, 0.2);
+    color: #ffd700;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+    font-weight: 600;
+    animation: pulse 1s ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes spin {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .features {
+        justify-content: center;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .user-panel {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .user-info {
+        align-items: center;
+    }
+    
+    .profile-info {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .reels {
+        gap: 5px;
+    }
+    
+    .symbol {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .game-controls {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .game-features {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-large {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .games-grid,
+    .bonuses-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+        margin: 10% auto;
+        padding: 1.5rem;
+    }
+    
+    .symbol {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+/* Animations */
+@keyframes spin {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-60px); }
+}
+
+.spinning {
+    animation: spin 0.5s ease-in-out;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+} 
